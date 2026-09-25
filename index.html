@@ -1,0 +1,2264 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>The Other Side of the AI Economy — Who Captures the Value?</title>
+
+<meta name="description"
+content="AI is increasing productivity and attracting unprecedented investment. But who actually captures the economic value — AI companies, infrastructure providers, businesses, or workers?">
+
+<meta property="og:title"
+content="The Other Side of the AI Economy — Who Captures the Value?">
+
+<meta property="og:description"
+content="AI is increasing productivity. But productivity, revenue, profit and economic value are not the same thing.">
+
+<meta property="og:type" content="article">
+
+<meta property="og:url"
+content="https://YOUR-GITHUB-USERNAME.github.io/ai-economics-of-work/">
+
+<meta property="og:image"
+content="https://YOUR-GITHUB-USERNAME.github.io/ai-economics-of-work/hero.png">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Inter, Arial, sans-serif;
+    background: #f5f7fb;
+    color: #172033;
+    line-height: 1.7;
+}
+
+.container {
+    width: min(1120px, 92%);
+    margin: auto;
+}
+
+
+/* NAVIGATION */
+
+nav {
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid #e5e7eb;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.nav-inner {
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.logo span {
+    color: #2563eb;
+}
+
+nav a {
+    margin-left: 25px;
+    color: #4b5563;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+
+/* HERO */
+
+.hero {
+    margin-top: 45px;
+    border-radius: 30px;
+    padding: 75px 60px;
+    color: white;
+    background:
+        radial-gradient(circle at 85% 20%, #3b82f6 0%, transparent 25%),
+        linear-gradient(135deg,#071536,#173b78);
+    overflow: hidden;
+}
+
+.tag {
+    display: inline-block;
+    padding: 7px 14px;
+    border-radius: 30px;
+    background: rgba(255,255,255,0.14);
+    font-size: 13px;
+    margin-bottom: 25px;
+}
+
+.hero h1 {
+    font-size: clamp(42px,6vw,70px);
+    line-height: 1.04;
+    max-width: 900px;
+}
+
+.hero h1 span {
+    color: #59d8ff;
+}
+
+.hero p {
+    margin-top: 25px;
+    max-width: 760px;
+    font-size: 20px;
+    color: #dbeafe;
+}
+
+.author {
+    margin-top: 30px;
+    color: #a9c1e8;
+}
+
+
+/* ARTICLE */
+
+.article {
+    margin-top: 30px;
+    background: white;
+    border-radius: 25px;
+    padding: 65px;
+    box-shadow: 0 12px 50px rgba(0,0,0,0.05);
+}
+
+.article h2 {
+    margin-top: 65px;
+    margin-bottom: 20px;
+    font-size: 35px;
+}
+
+.article h3 {
+    margin-bottom: 12px;
+    font-size: 22px;
+}
+
+.article p {
+    color: #4b5563;
+    margin-bottom: 20px;
+}
+
+.article strong {
+    color: #111827;
+}
+
+
+/* BIG QUESTION */
+
+.big-question {
+    margin: 30px 0;
+    padding: 35px;
+    background: linear-gradient(135deg,#eff6ff,#eef2ff);
+    border-radius: 18px;
+    border-left: 6px solid #2563eb;
+}
+
+.big-question p {
+    font-size: 25px;
+    color: #173b78;
+    font-weight: 700;
+}
+
+
+/* NUMBERS */
+
+.number-grid {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 18px;
+    margin-top: 30px;
+}
+
+.number-card {
+    padding: 30px;
+    border-radius: 20px;
+    background: #f8fafc;
+    border: 1px solid #e5e7eb;
+}
+
+.number {
+    font-size: 38px;
+    font-weight: 800;
+    color: #2563eb;
+}
+
+.number-card p {
+    margin-top: 10px;
+}
+
+
+/* CHART */
+
+.chart-box {
+    margin-top: 30px;
+    padding: 30px;
+    border: 1px solid #e5e7eb;
+    border-radius: 20px;
+    background: white;
+}
+
+.chart-container {
+    position: relative;
+    height: 390px;
+}
+
+.chart-source {
+    margin-top: 15px;
+    font-size: 12px;
+    color: #6b7280;
+}
+
+.chart-source a {
+    color: #2563eb;
+}
+
+
+/* CALLOUT */
+
+.callout {
+    margin: 35px 0;
+    padding: 35px;
+    border-radius: 20px;
+    background: #111827;
+    color: white;
+}
+
+.callout h3 {
+    color: #60a5fa;
+}
+
+.callout p {
+    color: #d1d5db;
+}
+
+.callout .big {
+    font-size: 30px;
+    font-weight: 800;
+    margin-top: 15px;
+}
+
+
+/* TEAM */
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 18px;
+    margin-top: 30px;
+}
+
+.team {
+    padding: 28px;
+    border-radius: 20px;
+}
+
+.team.one {
+    background: #eff6ff;
+}
+
+.team.two {
+    background: #f5f3ff;
+}
+
+.team.three {
+    background: #ecfdf5;
+}
+
+.team ul {
+    margin-left: 20px;
+    color: #4b5563;
+}
+
+
+/* FLOW */
+
+.flow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin: 35px 0;
+    flex-wrap: wrap;
+}
+
+.flow-box {
+    padding: 22px;
+    border-radius: 15px;
+    background: #eef2ff;
+    text-align: center;
+    font-weight: 700;
+}
+
+.arrow {
+    font-size: 25px;
+    color: #2563eb;
+}
+
+
+/* VALUE DISTRIBUTION */
+
+.value-grid {
+    display: grid;
+    grid-template-columns: repeat(5,1fr);
+    gap: 10px;
+    margin-top: 30px;
+}
+
+.value {
+    min-height: 150px;
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+    background: #f8fafc;
+    border: 1px solid #e5e7eb;
+}
+
+.value .icon {
+    font-size: 32px;
+}
+
+.value h4 {
+    margin-top: 10px;
+}
+
+.value p {
+    font-size: 13px;
+}
+
+
+/* PHYSICAL CONSTRAINT */
+
+.resource-grid {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.resource {
+    text-align: center;
+    padding: 25px 15px;
+    border-radius: 18px;
+    background: #f8fafc;
+}
+
+.resource-icon {
+    font-size: 35px;
+}
+
+
+/* CONCLUSION */
+
+.conclusion {
+    margin-top: 70px;
+    padding: 55px;
+    border-radius: 25px;
+    color: white;
+    background:
+        radial-gradient(circle at 90% 10%,#2563eb,transparent 25%),
+        linear-gradient(135deg,#0f172a,#172554);
+}
+
+.conclusion h2 {
+    margin-top: 0;
+}
+
+.conclusion p {
+    color: #dbeafe;
+}
+
+.statement {
+    margin: 30px 0;
+    font-size: 30px;
+    font-weight: 800;
+    color: white;
+}
+
+
+/* SOURCES */
+
+.sources {
+    margin-top: 50px;
+    padding: 30px;
+    background: #f8fafc;
+    border-radius: 18px;
+}
+
+.sources h3 {
+    margin-bottom: 15px;
+}
+
+.sources li {
+    margin: 10px 0;
+    font-size: 13px;
+}
+
+.sources a {
+    color: #2563eb;
+}
+
+
+/* FOOTER */
+
+footer {
+    text-align: center;
+    padding: 50px 20px;
+    color: #6b7280;
+}
+
+
+/* MOBILE */
+
+@media(max-width:800px) {
+
+    nav a {
+        display:none;
+    }
+
+    .hero {
+        padding: 50px 28px;
+    }
+
+    .article {
+        padding: 35px 25px;
+    }
+
+    .number-grid,
+    .team-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .value-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .resource-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .chart-container {
+        height: 300px;
+    }
+
+    .statement {
+        font-size: 24px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<nav>
+
+<div class="container nav-inner">
+
+<div class="logo">
+Tech<span>Thoughts</span>
+</div>
+
+<div>
+
+<a href="#investment">Investment</a>
+<a href="#revenue">Revenue</a>
+<a href="#infrastructure">Infrastructure</a>
+<a href="#value">Value</a>
+<a href="#conclusion">Conclusion</a>
+
+</div>
+
+</div>
+
+</nav>
+
+
+<main class="container">
+
+
+<!-- HERO -->
+
+<section class="hero">
+
+<div class="tag">
+AI • Economics • Technology • Future of Work
+</div>
+
+<h1>
+
+The Other Side of the AI Economy:
+
+<br>
+
+Who Actually
+<span>Captures the Value?</span>
+
+</h1>
+
+<p>
+
+AI is increasing productivity.
+
+AI companies are generating revenue.
+
+Investment is exploding.
+
+But there is another question we don't discuss enough:
+
+<strong>Who actually captures the economic value created by AI?</strong>
+
+</p>
+
+<div class="author">
+
+By Keerthi • Data Engineer • Technology & AI Enthusiast
+
+</div>
+
+</section>
+
+
+
+<article class="article">
+
+
+<!-- INTRO -->
+
+<section>
+
+<h2>🤔 The question after the question</h2>
+
+<p>
+
+In my previous article, I looked at AI from the perspective
+of human work.
+
+The conclusion was simple:
+
+</p>
+
+<div class="big-question">
+
+<p>
+AI may not replace entire teams overnight.
+It may reduce the amount of human effort required
+to deliver the same outcome.
+</p>
+
+</div>
+
+<p>
+
+But that creates a second economic question.
+
+If AI makes a company more productive...
+
+<strong>where does the economic value created by that productivity actually go?</strong>
+
+</p>
+
+</section>
+
+
+
+<!-- INVESTMENT -->
+
+<section id="investment">
+
+<h2>💰 First: Look at the money going into AI</h2>
+
+<p>
+
+The scale of investment is extraordinary.
+
+According to Stanford's 2026 AI Index,
+global corporate AI investment reached approximately
+<strong>$581.7 billion in 2025</strong>.
+
+That was more than double the previous year.
+
+</p>
+
+
+<div class="number-grid">
+
+<div class="number-card">
+
+<div class="number">
+$581.7B
+</div>
+
+<p>
+Global corporate AI investment in 2025.
+</p>
+
+</div>
+
+
+<div class="number-card">
+
+<div class="number">
+$344.7B
+</div>
+
+<p>
+Global private AI investment in 2025.
+</p>
+
+</div>
+
+
+<div class="number-card">
+
+<div class="number">
+$170.9B
+</div>
+
+<p>
+Generative AI private investment in 2025.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="chart-box">
+
+<h3>
+Global Corporate AI Investment
+</h3>
+
+<div class="chart-container">
+
+<canvas id="investmentChart"></canvas>
+
+</div>
+
+<div class="chart-source">
+
+Source:
+<a href="https://hai.stanford.edu/ai-index/2026-ai-index-report/economy"
+target="_blank">
+
+Stanford AI Index 2026
+
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- REVENUE -->
+
+<section id="revenue">
+
+<h2>📈 But investment isn't the same as revenue</h2>
+
+<p>
+
+AI companies are also generating revenue at extraordinary speed.
+
+OpenAI reported approximately <strong>$13 billion of revenue in 2025</strong>.
+
+But Reuters also reported approximately
+<strong>$8 billion of expenditure</strong> for the year.
+
+</p>
+
+<p>
+
+And this is where the economics become interesting.
+
+Revenue is not profit.
+
+Investment is not revenue.
+
+And expenditure is not automatically loss.
+
+We need to be careful not to manufacture a "profit" number
+when the company does not publicly disclose an AI-specific
+profit figure.
+
+</p>
+
+
+<div class="chart-box">
+
+<h3>
+OpenAI: Revenue vs Reported Expenditure
+</h3>
+
+<div class="chart-container">
+
+<canvas id="openaiChart"></canvas>
+
+</div>
+
+<div class="chart-source">
+
+Source:
+<a href="https://www.reuters.com/technology/openai-sees-compute-spend-around-600-billion-by-2030-cnbc-reports-2026-02-20/"
+target="_blank">
+
+Reuters, February 2026
+
+</a>
+
+<br>
+
+Revenue and expenditure are not equivalent to net profit/loss.
+
+</div>
+
+</div>
+
+
+
+<div class="callout">
+
+<h3>
+The important distinction
+</h3>
+
+<div class="big">
+
+Productivity ≠ Revenue
+
+<br>
+
+Revenue ≠ Profit
+
+<br>
+
+Investment ≠ Return
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- COMPUTE -->
+
+<section>
+
+<h2>🧠 Now look underneath the AI company</h2>
+
+<p>
+
+AI is not just software.
+
+It requires enormous amounts of compute.
+
+Stanford's 2026 AI Index, using Epoch AI estimates,
+puts annual compute spending in 2025 at approximately:
+
+</p>
+
+
+<div class="chart-box">
+
+<h3>
+Estimated Annual Compute Spend — 2025
+</h3>
+
+<div class="chart-container">
+
+<canvas id="computeChart"></canvas>
+
+</div>
+
+<div class="chart-source">
+
+Source:
+<a href="https://hai.stanford.edu/assets/files/ai_index_report_2026.pdf"
+target="_blank">
+
+Stanford AI Index 2026 / Epoch AI
+
+</a>
+
+<br>
+
+These are estimates of compute spend, not total company expenditure.
+
+</div>
+
+</div>
+
+<p>
+
+This is one reason why frontier AI economics are unusual.
+
+The product may look like software.
+
+But underneath it is a massive infrastructure business.
+
+</p>
+
+</section>
+
+
+
+<!-- BIG TECH -->
+
+<section>
+
+<h2>🏗️ The infrastructure layer is getting expensive too</h2>
+
+<p>
+
+The AI economy isn't limited to model companies.
+
+Cloud providers and technology companies are investing
+massively in data centers, networking, chips and energy infrastructure.
+
+</p>
+
+
+<div class="chart-box">
+
+<h3>
+Selected 2025 Capital Expenditure
+</h3>
+
+<div class="chart-container">
+
+<canvas id="capexChart"></canvas>
+
+</div>
+
+<div class="chart-source">
+
+Sources:
+
+<a href="https://www.microsoft.com/investor/reports/ar25/"
+target="_blank">
+
+Microsoft FY2025 Annual Report
+
+</a>
+
+<br>
+
+<a href="https://www.sec.gov/Archives/edgar/data/1652044/000165204426000018/goog-20251231.htm"
+target="_blank">
+
+Alphabet 2025 SEC filing
+
+</a>
+
+<br>
+
+<a href="https://www.sec.gov/Archives/edgar/data/1326801/000162828026025534/meta-12312025x10kars.htm"
+target="_blank">
+
+Meta 2025 SEC filing
+
+</a>
+
+</div>
+
+</div>
+
+<p>
+
+Important:
+
+these companies are not "AI-only companies".
+
+Their capex supports broader businesses as well as AI.
+
+The graph therefore shows the <strong>scale of infrastructure investment</strong>,
+not pure AI expenditure.
+
+</p>
+
+</section>
+
+
+
+<!-- TEAM ECONOMICS -->
+
+<section>
+
+<h2>👥 Now bring this back to our original 5-person team</h2>
+
+<p>
+
+Imagine a traditional technology project:
+
+</p>
+
+
+<div class="team-grid">
+
+
+<div class="team one">
+
+<h3>
+🔵 Traditional
+</h3>
+
+<ul>
+
+<li>1 SME</li>
+
+<li>2 Data Engineers</li>
+
+<li>2 BI Developers</li>
+
+<li>High human effort</li>
+
+</ul>
+
+</div>
+
+
+<div class="team two">
+
+<h3>
+🟣 AI Heavy
+</h3>
+
+<ul>
+
+<li>AI Agents</li>
+
+<li>Minimal human execution</li>
+
+<li>High automation</li>
+
+<li>High dependence on infrastructure</li>
+
+</ul>
+
+</div>
+
+
+<div class="team three">
+
+<h3>
+🟢 Hybrid
+</h3>
+
+<ul>
+
+<li>1 SME</li>
+
+<li>1 Data Engineer</li>
+
+<li>1 BI Developer</li>
+
+<li>AI Agents</li>
+
+</ul>
+
+</div>
+
+</div>
+
+
+<div class="flow">
+
+<div class="flow-box">
+Client
+</div>
+
+<div class="arrow">
+→
+</div>
+
+<div class="flow-box">
+Business Problem
+</div>
+
+<div class="arrow">
+→
+</div>
+
+<div class="flow-box">
+Human Expertise
+</div>
+
+<div class="arrow">
+→
+</div>
+
+<div class="flow-box">
+AI Execution
+</div>
+
+<div class="arrow">
+→
+</div>
+
+<div class="flow-box">
+Solution
+</div>
+
+</div>
+
+
+<p>
+
+The cost of human execution can fall.
+
+But another cost appears:
+
+<strong>AI infrastructure, model usage, cloud, governance,
+security, monitoring and specialised expertise.</strong>
+
+</p>
+
+</section>
+
+
+
+<!-- VALUE DISTRIBUTION -->
+
+<section id="value">
+
+<h2>💸 Where does the economic value go?</h2>
+
+<p>
+
+This is the part I find most interesting.
+
+When a company adopts AI, the economic value doesn't necessarily
+stay with the company using it.
+
+It can spread across the ecosystem.
+
+</p>
+
+
+<div class="value-grid">
+
+<div class="value">
+
+<div class="icon">🧠</div>
+
+<h4>AI Model Companies</h4>
+
+<p>
+Models, agents and APIs.
+</p>
+
+</div>
+
+
+<div class="value">
+
+<div class="icon">☁️</div>
+
+<h4>Cloud Providers</h4>
+
+<p>
+Compute, storage and data centers.
+</p>
+
+</div>
+
+
+<div class="value">
+
+<div class="icon">🔬</div>
+
+<h4>Chip Companies</h4>
+
+<p>
+GPUs, memory and networking.
+</p>
+
+</div>
+
+
+<div class="value">
+
+<div class="icon">🏢</div>
+
+<h4>Businesses</h4>
+
+<p>
+Lower costs and potentially new revenue.
+</p>
+
+</div>
+
+
+<div class="value">
+
+<div class="icon">👨‍💻</div>
+
+<h4>Skilled Workers</h4>
+
+<p>
+Higher productivity and higher-value work.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="callout">
+
+<h3>
+The question is not whether AI creates value.
+</h3>
+
+<div class="big">
+
+The question is:
+
+<br><br>
+
+Who captures that value?
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- PRODUCTIVITY VS REVENUE -->
+
+<section>
+
+<h2>📊 Productivity does not automatically mean more revenue</h2>
+
+<p>
+
+Consider a simple example.
+
+A company spends ₹1 crore to operate a process.
+
+AI reduces the cost to ₹60 lakh.
+
+That's a significant productivity improvement.
+
+But suppose revenue remains ₹1.2 crore.
+
+The company didn't suddenly double its revenue.
+
+It simply improved the economics of delivering the same output.
+
+</p>
+
+
+<div class="chart-box">
+
+<h3>
+Illustrative Business Economics
+</h3>
+
+<div class="chart-container">
+
+<canvas id="businessChart"></canvas>
+
+</div>
+
+<div class="chart-source">
+
+Illustrative scenario — not measured industry data.
+
+</div>
+
+</div>
+
+
+<p>
+
+This distinction matters because AI marketing often focuses
+on what becomes technically possible.
+
+Business value depends on what the company actually does
+with that new capacity.
+
+</p>
+
+</section>
+
+
+
+<!-- RESOURCES -->
+
+<section id="infrastructure">
+
+<h2>⚡ Then there is the physical AI economy</h2>
+
+<p>
+
+This is where the AI story becomes much more physical.
+
+AI requires:
+
+</p>
+
+
+<div class="resource-grid">
+
+<div class="resource">
+
+<div class="resource-icon">
+⚡
+</div>
+
+<h3>
+Electricity
+</h3>
+
+<p>
+Power generation and grid capacity.
+</p>
+
+</div>
+
+
+<div class="resource">
+
+<div class="resource-icon">
+💧
+</div>
+
+<h3>
+Cooling
+</h3>
+
+<p>
+Cooling systems and water infrastructure.
+</p>
+
+</div>
+
+
+<div class="resource">
+
+<div class="resource-icon">
+🧠
+</div>
+
+<h3>
+Chips
+</h3>
+
+<p>
+Advanced semiconductors and memory.
+</p>
+
+</div>
+
+
+<div class="resource">
+
+<div class="resource-icon">
+🏭
+</div>
+
+<h3>
+Data Centers
+</h3>
+
+<p>
+Buildings, networking and physical infrastructure.
+</p>
+
+</div>
+
+</div>
+
+
+<p>
+
+The IEA estimates that global data-center electricity
+consumption was approximately <strong>485 TWh in 2025</strong>
+and projects around <strong>950 TWh by 2030</strong> in its
+updated base case.
+
+AI-focused data-center electricity consumption is projected
+to triple over that period.
+
+</p>
+
+
+<div class="chart-box">
+
+<h3>
+Global Data Center Electricity Demand
+</h3>
+
+<div class="chart-container">
+
+<canvas id="energyChart"></canvas>
+
+</div>
+
+<div class="chart-source">
+
+Source:
+<a href="https://www.iea.org/reports/key-questions-on-energy-and-ai/executive-summary"
+target="_blank">
+
+International Energy Agency — Key Questions on Energy and AI
+
+</a>
+
+</div>
+
+</div>
+
+
+<div class="callout">
+
+<h3>
+The paradox
+</h3>
+
+<div class="big">
+
+AI can become more efficient per task...
+
+<br><br>
+
+while total AI demand continues to grow.
+
+</div>
+
+<p>
+
+Efficiency gains can reduce the resources required per task,
+but greater adoption and more energy-intensive applications
+can increase total demand.
+
+</p>
+
+</div>
+
+</section>
+
+
+
+<!-- STAGNATION -->
+
+<section>
+
+<h2>🧱 Could physical constraints create a new ceiling?</h2>
+
+<p>
+
+I don't think the correct argument is:
+
+<strong>"AI will run out of chips or water."</strong>
+
+That's too simplistic.
+
+A better question is:
+
+<strong>"How quickly can physical infrastructure scale compared
+with the demand for AI?"</strong>
+
+</p>
+
+
+<div class="big-question">
+
+<p>
+
+Software can scale extremely quickly.
+
+Physical infrastructure cannot.
+
+</p>
+
+</div>
+
+
+<p>
+
+A model can be improved through software.
+
+But building:
+
+</p>
+
+<ul style="margin-left:25px;margin-bottom:25px;color:#4b5563;">
+
+<li>new semiconductor fabs</li>
+
+<li>new data centers</li>
+
+<li>new transmission capacity</li>
+
+<li>new power generation</li>
+
+<li>new cooling infrastructure</li>
+
+<li>new networking infrastructure</li>
+
+</ul>
+
+<p>
+
+requires capital, materials, energy, construction time,
+regulatory approvals and skilled labour.
+
+The IEA specifically identifies bottlenecks across
+electricity infrastructure, transformers, advanced chips
+and other components as constraints on near-term
+data-center expansion.
+
+</p>
+
+
+<p>
+
+So I wouldn't predict an "AI resource depletion collapse".
+
+I'd call it something more realistic:
+
+<strong>the economics of scaling AI may become increasingly
+dependent on physical infrastructure.</strong>
+
+</p>
+
+</section>
+
+
+
+<!-- FINAL ECONOMIC MODEL -->
+
+<section>
+
+<h2>🔄 The AI economic loop</h2>
+
+
+<div class="flow">
+
+<div class="flow-box">
+Investment
+</div>
+
+<div class="arrow">
+→
+</div>
+
+<div class="flow-box">
+Compute
+</div>
+
+<div class="arrow">
+→
+</div>
+
+<div class="flow-box">
+AI Capability
+</div>
+
+<div class="arrow">
+→
+</div>
+
+<div class="flow-box">
+Productivity
+</div>
+
+<div class="arrow">
+→
+</div>
+
+<div class="flow-box">
+Business Value
+</div>
+
+</div>
+
+
+<p>
+
+But the loop doesn't end there.
+
+Business value creates demand for more AI.
+
+More AI creates demand for more compute.
+
+More compute requires more infrastructure.
+
+More infrastructure requires more capital.
+
+And the economic value gets distributed across the ecosystem.
+
+</p>
+
+</section>
+
+
+
+<!-- CONCLUSION -->
+
+<section id="conclusion" class="conclusion">
+
+<h2>
+🎯 My Perspective
+</h2>
+
+<p>
+
+I'm not arguing that AI is a bubble.
+
+I'm not arguing that AI doesn't create value.
+
+And I'm definitely not arguing that AI won't improve productivity.
+
+It already is.
+
+</p>
+
+<p>
+
+My question is about the economics underneath the excitement.
+
+</p>
+
+
+<div class="statement">
+
+AI can increase productivity without automatically
+doubling business revenue.
+
+</div>
+
+
+<p>
+
+A company can use AI to replace repetitive human effort.
+
+But some of that spending can move into:
+
+<br><br>
+
+AI models → Cloud → Compute → Chips → Energy →
+Infrastructure → Governance → Human expertise
+
+</p>
+
+
+<div class="statement">
+
+The cost doesn't necessarily disappear.
+
+It moves.
+
+</div>
+
+
+<p>
+
+And that's why I think the future will not simply be:
+
+</p>
+
+
+<div class="statement">
+
+"AI replaces humans."
+
+</div>
+
+
+<p>
+
+It will be a redistribution of economic value across
+humans, AI companies, cloud providers, chip manufacturers,
+infrastructure companies and the businesses actually
+using AI.
+
+</p>
+
+
+<div class="statement">
+
+The real race is not simply to build AI.
+
+<br><br>
+
+It is to capture economic value from AI.
+
+</div>
+
+
+<p>
+
+And for individuals, the same principle applies.
+
+Don't just learn how to use AI.
+
+Combine:
+
+</p>
+
+
+<div class="statement">
+
+AI + Technology + Business + Domain Expertise
+
+</div>
+
+
+<p>
+
+Because the person who understands the business problem,
+knows the domain, knows how to use AI and can measure
+the economic outcome may become much more valuable than
+someone who only knows how to perform the underlying task.
+
+</p>
+
+
+<div class="statement">
+
+Productivity is the beginning of the AI story.
+
+Value capture is the bigger story.
+
+</div>
+
+</section>
+
+
+
+<!-- SOURCES -->
+
+<section class="sources">
+
+<h3>
+📚 Data Sources
+</h3>
+
+<ul>
+
+<li>
+
+<a href="https://hai.stanford.edu/ai-index/2026-ai-index-report/economy"
+target="_blank">
+
+Stanford AI Index 2026 — Economy
+
+</a>
+
+</li>
+
+
+<li>
+
+<a href="https://hai.stanford.edu/assets/files/ai_index_report_2026.pdf"
+target="_blank">
+
+Stanford AI Index 2026 — Investment & Infrastructure
+
+</a>
+
+</li>
+
+
+<li>
+
+<a href="https://www.reuters.com/technology/openai-sees-compute-spend-around-600-billion-by-2030-cnbc-reports-2026-02-20/"
+target="_blank">
+
+Reuters — OpenAI revenue, expenditure and compute plans
+
+</a>
+
+</li>
+
+
+<li>
+
+<a href="https://www.iea.org/reports/key-questions-on-energy-and-ai/executive-summary"
+target="_blank">
+
+International Energy Agency — Key Questions on Energy and AI
+
+</a>
+
+</li>
+
+
+<li>
+
+<a href="https://www.microsoft.com/investor/reports/ar25/"
+target="_blank">
+
+Microsoft FY2025 Annual Report
+
+</a>
+
+</li>
+
+
+<li>
+
+<a href="https://www.sec.gov/Archives/edgar/data/1652044/000165204426000018/goog-20251231.htm"
+target="_blank">
+
+Alphabet 2025 SEC Filing
+
+</a>
+
+</li>
+
+
+<li>
+
+<a href="https://www.sec.gov/Archives/edgar/data/1326801/000162828026025534/meta-12312025x10kars.htm"
+target="_blank">
+
+Meta 2025 SEC Filing
+
+</a>
+
+</li>
+
+</ul>
+
+
+<p style="margin-top:20px;font-size:12px;color:#6b7280;">
+
+Important: Company-level financial figures do not necessarily
+represent AI-only revenue, expenditure or profit. Where
+AI-specific financial data is unavailable, this article
+explicitly labels the figures as company-wide or illustrative.
+
+</p>
+
+</section>
+
+
+</article>
+
+</main>
+
+
+<footer>
+
+© 2026 Keerthi • Technology • Data • AI
+
+</footer>
+
+
+
+<script>
+
+
+/* ------------------------------
+   GLOBAL CHART SETTINGS
+-------------------------------- */
+
+Chart.defaults.font.family =
+"Inter, Arial, sans-serif";
+
+Chart.defaults.color = "#4b5563";
+
+
+/* ------------------------------
+   INVESTMENT
+-------------------------------- */
+
+new Chart(
+
+document.getElementById("investmentChart"),
+
+{
+
+type:"bar",
+
+data:{
+
+labels:["2024","2025"],
+
+datasets:[{
+
+label:"Global corporate AI investment ($B)",
+
+data:[253.25,581.69],
+
+backgroundColor:["#93c5fd","#2563eb"],
+
+borderRadius:8
+
+}]
+
+},
+
+options:{
+
+responsive:true,
+
+maintainAspectRatio:false,
+
+plugins:{
+
+legend:{
+display:false
+},
+
+tooltip:{
+
+callbacks:{
+
+label:function(context){
+
+return "$" +
+context.raw.toFixed(2) +
+"B";
+
+}
+
+}
+
+}
+
+},
+
+scales:{
+
+y:{
+
+beginAtZero:true,
+
+title:{
+
+display:true,
+
+text:"USD billions"
+
+}
+
+}
+
+}
+
+}
+
+}
+
+);
+
+
+/* ------------------------------
+   OPENAI
+-------------------------------- */
+
+new Chart(
+
+document.getElementById("openaiChart"),
+
+{
+
+type:"bar",
+
+data:{
+
+labels:["Revenue","Reported expenditure"],
+
+datasets:[{
+
+label:"USD billions",
+
+data:[13,8],
+
+backgroundColor:["#2563eb","#a78bfa"],
+
+borderRadius:8
+
+}]
+
+},
+
+options:{
+
+responsive:true,
+
+maintainAspectRatio:false,
+
+plugins:{
+
+legend:{
+display:false
+}
+
+},
+
+scales:{
+
+y:{
+
+beginAtZero:true,
+
+title:{
+
+display:true,
+
+text:"USD billions"
+
+}
+
+}
+
+}
+
+}
+
+}
+
+);
+
+
+/* ------------------------------
+   COMPUTE
+-------------------------------- */
+
+new Chart(
+
+document.getElementById("computeChart"),
+
+{
+
+type:"bar",
+
+data:{
+
+labels:["OpenAI","Anthropic"],
+
+datasets:[{
+
+label:"Estimated 2025 compute spend ($B)",
+
+data:[16.3,6.8],
+
+backgroundColor:["#2563eb","#7c3aed"],
+
+borderRadius:8
+
+}]
+
+},
+
+options:{
+
+responsive:true,
+
+maintainAspectRatio:false,
+
+plugins:{
+
+legend:{
+display:false
+}
+
+},
+
+scales:{
+
+y:{
+
+beginAtZero:true,
+
+title:{
+
+display:true,
+
+text:"USD billions"
+
+}
+
+}
+
+}
+
+}
+
+}
+
+);
+
+
+/* ------------------------------
+   BIG TECH CAPEX
+-------------------------------- */
+
+new Chart(
+
+document.getElementById("capexChart"),
+
+{
+
+type:"bar",
+
+data:{
+
+labels:["Alphabet","Meta","Microsoft","Amazon"],
+
+datasets:[{
+
+label:"2025 capital expenditure ($B)",
+
+data:[91.4,69.69,88.2,125],
+
+backgroundColor:[
+
+"#4285f4",
+
+"#1877f2",
+
+"#5b5fc7",
+
+"#ff9900"
+
+],
+
+borderRadius:8
+
+}]
+
+},
+
+options:{
+
+responsive:true,
+
+maintainAspectRatio:false,
+
+plugins:{
+
+legend:{
+display:false
+}
+
+},
+
+scales:{
+
+y:{
+
+beginAtZero:true,
+
+title:{
+
+display:true,
+
+text:"USD billions"
+
+}
+
+}
+
+}
+
+}
+
+}
+
+);
+
+
+/* ------------------------------
+   BUSINESS ECONOMICS
+-------------------------------- */
+
+new Chart(
+
+document.getElementById("businessChart"),
+
+{
+
+type:"bar",
+
+data:{
+
+labels:[
+
+"Revenue",
+
+"Traditional operating cost",
+
+"AI-enabled operating cost"
+
+],
+
+datasets:[{
+
+label:"Illustrative ₹ Crore",
+
+data:[1.2,1.0,0.6],
+
+backgroundColor:[
+
+"#2563eb",
+
+"#94a3b8",
+
+"#10b981"
+
+],
+
+borderRadius:8
+
+}]
+
+},
+
+options:{
+
+responsive:true,
+
+maintainAspectRatio:false,
+
+plugins:{
+
+legend:{
+display:false
+}
+
+},
+
+scales:{
+
+y:{
+
+beginAtZero:true,
+
+title:{
+
+display:true,
+
+text:"₹ Crore"
+
+}
+
+}
+
+}
+
+}
+
+}
+
+);
+
+
+/* ------------------------------
+   ENERGY
+-------------------------------- */
+
+new Chart(
+
+document.getElementById("energyChart"),
+
+{
+
+type:"line",
+
+data:{
+
+labels:["2025","2030"],
+
+datasets:[{
+
+label:"Global data-center electricity consumption",
+
+data:[485,950],
+
+borderColor:"#2563eb",
+
+backgroundColor:"rgba(37,99,235,0.12)",
+
+fill:true,
+
+tension:0.25,
+
+pointRadius:7
+
+}]
+
+},
+
+options:{
+
+responsive:true,
+
+maintainAspectRatio:false,
+
+plugins:{
+
+legend:{
+display:true
+}
+
+},
+
+scales:{
+
+y:{
+
+beginAtZero:true,
+
+title:{
+
+display:true,
+
+text:"TWh"
+
+}
+
+}
+
+}
+
+}
+
+}
+
+);
+
+</script>
+
+
+</body>
+
+</html>
